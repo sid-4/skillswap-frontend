@@ -1,0 +1,13 @@
+<h2 class="mb-4">Platform Stats</h2>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<div class="card" *ngIf="stats">
+  <div class="card-body">
+    <p><strong>Total Users:</strong> {{ stats.total_users }}</p>
+    <p><strong>Active Jobs:</strong> {{ stats.active_jobs }}</p>
+    <p><strong>Total Value Moved:</strong> {{ stats.total_value_moved }}</p>
+  </div>
+</div>

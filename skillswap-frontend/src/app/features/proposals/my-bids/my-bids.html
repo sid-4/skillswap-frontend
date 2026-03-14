@@ -1,0 +1,28 @@
+<h2 class="mb-4">My Bids</h2>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<div class="alert alert-success" *ngIf="successMessage">
+  {{ successMessage }}
+</div>
+
+<div *ngIf="loading">Loading your bids...</div>
+
+<div class="card mb-3" *ngFor="let proposal of proposals">
+  <div class="card-body">
+    <p><strong>Proposal ID:</strong> {{ proposal.id }}</p>
+    <p><strong>Price:</strong> {{ proposal.price }}</p>
+    <p><strong>Status:</strong> {{ proposal.status }}</p>
+    <p><strong>Cover Letter:</strong> {{ proposal.cover_letter || proposal.message }}</p>
+
+    <button
+      class="btn btn-danger btn-sm"
+      (click)="deleteProposal(proposal.id)"
+      [disabled]="proposal.status !== 'pending'"
+    >
+      Delete Proposal
+    </button>
+  </div>
+</div>

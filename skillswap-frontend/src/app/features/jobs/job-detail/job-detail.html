@@ -1,0 +1,75 @@
+<div *ngIf="loading">Loading job details...</div>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<div class="alert alert-success" *ngIf="successMessage">
+  {{ successMessage }}
+</div>
+
+<div class="card mb-4" *ngIf="job">
+  <div class="card-body">
+    <h2 class="card-title">{{ job.title }}</h2>
+    <p class="card-text">{{ job.description }}</p>
+
+    <p><strong>Budget:</strong> {{ job.budget }}</p>
+    <p><strong>Category:</strong> {{ job.category }}</p>
+    <p><strong>Status:</strong> {{ job.status }}</p>
+
+    <p *ngIf="job.owner">
+      <strong>Owner:</strong> {{ job.owner.name }} ({{ job.owner.username }})
+    </p>
+
+    <p *ngIf="job.freelancer">
+      <strong>Freelancer:</strong> {{ job.freelancer.name }} ({{ job.freelancer.username }})
+    </p>
+
+    <div class="d-flex gap-2 flex-wrap">
+      <a
+        *ngIf="canViewProposals()"
+        class="btn btn-outline-secondary btn-sm"
+        [routerLink]="['/jobs', job.id, 'proposals']"
+      >
+        View Proposals
+      </a>
+
+      <button
+        *ngIf="canCompleteJob()"
+        class="btn btn-success btn-sm"
+        (click)="completeJob()"
+        [disabled]="loading"
+      >
+        Mark as Completed
+      </button>
+
+      <a
+        *ngIf="canLeaveReview()"
+        class="btn btn-primary btn-sm"
+        [routerLink]="['/jobs', job.id, 'review']"
+      >
+        Leave Review
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="card" *ngIf="canSubmitProposal()">
+  <div class="card-body">
+    <h4 class="mb-3">Submit a Proposal</h4>
+
+    <form [formGroup]="proposalForm" (ngSubmit)="submitProposal()">
+      <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input type="number" class="form-control" formControlName="price" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Cover Letter</label>
+        <textarea class="form-control" rows="4" formControlName="cover_letter"></textarea>
+      </div>
+
+      <button class="btn btn-primary" type="submit" [disabled]="loading">Submit Proposal</button>
+    </form>
+  </div>
+</div>

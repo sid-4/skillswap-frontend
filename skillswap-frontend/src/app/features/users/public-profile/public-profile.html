@@ -1,0 +1,25 @@
+<h2 class="mb-4">Public Profile</h2>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<div class="card mb-4" *ngIf="user">
+  <div class="card-body">
+    <h4>{{ user.name }}</h4>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Bio:</strong> {{ user.bio }}</p>
+    <p><strong>Skills:</strong> {{ user.skills?.join(', ') }}</p>
+    <p><strong>Rating:</strong> {{ user.rating_avg }}</p>
+    <p><strong>Completed Jobs:</strong> {{ user.completed_jobs }}</p>
+  </div>
+</div>
+
+<h4>User Reviews</h4>
+
+<div class="card mb-3" *ngFor="let review of reviews">
+  <div class="card-body">
+    <p><strong>Rating:</strong> {{ review.rating }}</p>
+    <p><strong>Comment:</strong> {{ review.comment }}</p>
+  </div>
+</div>

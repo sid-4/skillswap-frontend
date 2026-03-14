@@ -1,0 +1,29 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h2 class="mb-4">Login</h2>
+
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" formControlName="email" />
+        <div class="text-danger mt-1" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+          Email invalide ou manquant.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" formControlName="password" />
+        <div class="text-danger mt-1" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+          Password requis.
+        </div>
+      </div>
+
+      <button class="btn btn-primary w-100" type="submit" [disabled]="loading">Login</button>
+    </form>
+
+    <div class="alert alert-danger mt-3" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>

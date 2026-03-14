@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h2 class="mb-4">Leave Review</h2>
+
+    <div *ngIf="loading">Loading review info...</div>
+
+    <div class="alert alert-danger" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <div class="alert alert-success" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+
+    <div class="card mb-3" *ngIf="targetUser">
+      <div class="card-body">
+        <p class="mb-0">
+          <strong>Review for:</strong>
+          {{ targetUser.name }} (ID: {{ targetUser.id }})
+        </p>
+      </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submitReview()" *ngIf="!loading">
+      <div class="mb-3">
+        <label class="form-label">Rating (1 to 5)</label>
+        <input type="number" min="1" max="5" class="form-control" formControlName="rating" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Comment</label>
+        <textarea class="form-control" rows="4" formControlName="comment"></textarea>
+      </div>
+
+      <button class="btn btn-primary w-100" type="submit" [disabled]="loading">Submit Review</button>
+    </form>
+  </div>
+</div>

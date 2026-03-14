@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h2 class="mb-4">Create Job</h2>
+
+    <form [formGroup]="form" (ngSubmit)="createJob()">
+      <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input class="form-control" formControlName="title" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" rows="4" formControlName="description"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Budget</label>
+        <input type="number" class="form-control" formControlName="budget" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Category</label>
+        <input class="form-control" formControlName="category" />
+      </div>
+
+      <button class="btn btn-success w-100" type="submit" [disabled]="loading">Create Job</button>
+    </form>
+
+    <div class="alert alert-danger mt-3" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>

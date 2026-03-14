@@ -1,0 +1,25 @@
+<h2 class="mb-4">Available Jobs</h2>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="loading">Loading jobs...</div>
+
+<div class="row" *ngIf="!loading">
+  <div class="col-md-6 mb-3" *ngFor="let job of jobs">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">{{ job.title }}</h5>
+        <p class="card-text">{{ job.description }}</p>
+        <p class="mb-1"><strong>Budget:</strong> {{ job.budget }}</p>
+        <p class="mb-1"><strong>Category:</strong> {{ job.category }}</p>
+        <p class="mb-2"><strong>Status:</strong> {{ job.status }}</p>
+
+        <a class="btn btn-outline-primary btn-sm" [routerLink]="['/jobs', job.id]">
+          View Details
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
